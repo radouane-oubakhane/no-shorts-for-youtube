@@ -1,39 +1,96 @@
-# No Shorts for YouTube — v2.0.0
+# No Shorts for YouTube
 
-Independent Manifest V3 Chrome extension that hides recognizable Shorts in YouTube feeds, search, subscriptions, history, recommendations and channels. Enabled by default. No remote services or telemetry.
+**A cleaner YouTube experience. Fewer distractions. More focus.**
 
-## Install / develop
+No Shorts for YouTube is a lightweight, open-source Chrome extension that automatically hides YouTube Shorts while preserving regular videos.
 
-Open `chrome://extensions`, enable Developer mode, select **Load unpacked** and choose the `extension/` directory (not the repository root). Disable the old v1 installation and reload open YouTube tabs. Pin the new extension to the toolbar to open the menu.
+![Version](https://img.shields.io/badge/version-2.0.0-blue)
+![License](https://img.shields.io/badge/license-MIT-green)
+![Manifest](https://img.shields.io/badge/Manifest-V3-orange)
 
-The popup supports a master switch, optional navigation filtering, optional direct-link redirection, and reset. Settings are saved in `chrome.storage.local`. All three switches default to on. Changes propagate to running content scripts using `chrome.storage.onChanged`; installing/updating requires reloading already-open YouTube pages. Direct Shorts routes redirect to the homepage; channel Shorts routes redirect to that channel's Videos page. Comments/descriptions with Shorts links remain readable, but their links are redirected when direct-link blocking is on.
+## Features
 
-## Source layout
+- Hide Shorts from the YouTube homepage.
+- Remove Shorts from search results, subscriptions, history and recommendations.
+- Hide Shorts on channel pages.
+- Remove Shorts navigation buttons and tabs.
+- Block direct Shorts links.
+- Enable or disable filtering instantly.
+- Automatic light and dark themes.
+- Persistent local preferences.
+- No tracking, advertisements or external services.
 
-- `extension/` — complete runtime, no third-party dependencies or build step
-- `tests/` — unit tests, offline Chromium fixture tests, optional unpacked extension integration test
-- `scripts/package.py` — validates and builds store ZIP with manifest at root
-- `store/` — listing copy, privacy policy, promotional graphics and actual popup renders (mocked Chrome storage)
-- `CHANGELOG.md` — releases; Git tags `v1.0.0`, `v2.0.0`
+## Installation
 
-## Test / package
+1. Download or clone this repository.
+2. Open `chrome://extensions` in Chrome.
+3. Enable **Developer mode**.
+4. Click **Load unpacked**.
+5. Select the `extension/` directory.
+6. Refresh YouTube.
 
-```bash
-node --test tests/routes.test.js
-python -m venv .venv
-source .venv/bin/activate
-pip install playwright
-python tests/browser_test.py
-# Optional: run on a machine allowing unpacked extensions and intercepted YouTube navigation
-python tests/extension_integration.py
-python scripts/package.py
-```
-Set `CHROMIUM=/path/to/chromium` if needed. The optional test uses an intercepted fixture, not live YouTube.
+Pin the extension to your browser toolbar to access its settings.
 
-## Verification / release gate
+## How it works
 
-Route and settings unit tests passed; actual Chromium DOM/CSS and popup tests passed using representative offline layouts and mocked Chrome storage. The full installed-extension integration could not be run: the build environment blocks unpacked extension loading and YouTube navigation. Before Store submission, load it on your desktop Chrome and complete the live smoke-test checklist in `store/PUBLISHING.md`. The site can change markup; unmarked Shorts served as ordinary watch links may remain visible. The extension is not intended for the native YouTube phone app.
+The extension uses CSS and JavaScript to detect recognizable YouTube Shorts elements and URL patterns.
 
-## Version control
+It dynamically filters newly loaded content as you scroll or navigate, without relying on video duration, resolution or orientation.
 
-The source archive includes the initialized local Git repository and two release tags. No public remote has been created. The initial import preserves the original v1.0.0; the second commit contains the revised extension. Configure your own Git author before making further commits. See `git log --oneline --decorate`.
+## Project structure
+
+- `extension/` — Extension source code and assets.
+- `tests/` — Automated tests and browser integration tests.
+- `scripts/` — Packaging and validation tools.
+- `store/` — Chrome Web Store publishing materials.
+- `CHANGELOG.md` — Version history.
+- `LICENSE` — MIT License.
+
+## Development
+
+    git clone https://github.com/radouane-oubakhane/no-shorts-for-youtube.git
+    cd no-shorts-for-youtube
+
+The extension requires no runtime dependencies or compilation.
+
+### Run tests
+
+    node --test tests/routes.test.js
+
+For browser tests:
+
+    python -m venv .venv
+    source .venv/bin/activate
+    pip install playwright
+    python -m playwright install chromium
+    python tests/browser_test.py
+
+### Build the release package
+
+    python scripts/package.py
+
+## Privacy
+
+All processing takes place locally in your browser. Preferences are stored using Chrome's local storage API.
+
+No personal information is collected or transmitted.
+
+## Compatibility and limitations
+
+Built for Chromium-based browsers using Manifest V3.
+
+YouTube layout changes may affect filtering. Automated offline tests have passed, but live installed-extension verification is still required.
+
+The extension does not support the native YouTube mobile application.
+
+## Contributing
+
+Bug reports, feature requests and pull requests are welcome.
+
+## License
+
+Distributed under the MIT License. See `LICENSE` for details.
+
+---
+
+An independent open-source project. Not affiliated with YouTube or Google.
