@@ -1,0 +1,11 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>No Shorts</title><link rel="stylesheet" href="popup.css"></head>
+<body><main class="shell">
+<header><img src="../icons/icon-128.png" width="46" height="46" alt=""><div><h1>No Shorts</h1><p>For YouTube · Focus by choice</p></div><span class="version" id="version"></span></header>
+<section class="hero" aria-label="Protection status"><div class="status"><span id="dot" class="dot"></span><span id="status" role="status">Loading…</span></div><div class="main-control"><div><h2>Hide Shorts</h2><p>Cleaner feeds, fewer distractions.</p></div><label class="switch"><input type="checkbox" id="enabled" aria-label="Hide Shorts" disabled><span></span></label></div></section>
+<h2 class="section-label">Preferences</h2>
+<section class="options"><div class="option"><div><h3>Hide Shorts navigation</h3><p>Sidebar, channel tabs and filters</p></div><label class="switch"><input type="checkbox" id="hideNavigation" aria-label="Hide Shorts navigation" disabled><span></span></label></div><div class="option"><div><h3>Block direct Shorts links</h3><p>Redirect away from the Shorts player</p></div><label class="switch"><input type="checkbox" id="blockDirect" aria-label="Block direct Shorts links" disabled><span></span></label></div></section>
+<p class="note"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-11V5l-8-3-8 3v6c0 7 8 11 8 11Z"/><path d="m9 12 2 2 4-4"/></svg> Local settings. No tracking. No account.</p>
+<div id="error" role="alert" hidden>Settings could not be saved. Please try again.</div>
+<footer><button id="reset" type="button" disabled>Reset defaults</button><a href="about.html" target="_blank" rel="noopener">About &amp; privacy ↗</a></footer>
+</main><script src="../src/shared.js"></script><script src="popup.js"></script></body></html>
